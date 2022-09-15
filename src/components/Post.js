@@ -12,7 +12,7 @@ function Post ( props ) {
 
     const getData = async () => {
         try{
-        const allData = await axios.get( `http://localhost:3001/post` );
+        const allData = await axios.get( `https://thawing-peak-42804.herokuapp.com/post` );
         setPost( allData.data.post );
         console.log( allData.data.post );
         } catch ( error ) {
