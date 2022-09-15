@@ -5,6 +5,7 @@ import AddComment from "./Add-comment-form";
 import React from 'react';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
+import '../App.css';
 
 function Post ( props ) {
 
@@ -12,7 +13,7 @@ function Post ( props ) {
 
     const getData = async () => {
         try{
-        const allData = await axios.get( `https://thawing-peak-42804.herokuapp.com/post` );
+        const allData = await axios.get( `http://localhost:3001/post` );
         setPost( allData.data.post );
         console.log( allData.data.post );
         } catch ( error ) {
@@ -22,7 +23,7 @@ function Post ( props ) {
 
     const handleDelete = async ( id ) => {
         try{
-        await axios.delete( `https://thawing-peak-42804.herokuapp.com/post/${id}` );
+        await axios.delete( `http://localhost:3001/post/${id}` );
         getData();
     } catch ( error ) {
         console.log( error );
@@ -31,7 +32,7 @@ function Post ( props ) {
 
     const handleEdit = async ( id ) => {
         try{
-      await axios.put( `https://thawing-peak-42804.herokuapp.com/post/${id}` );
+      await axios.put( `http://localhost:3001/post/${id}` );
       getData(); 
     } catch ( error ) {
         console.log( error );
@@ -42,11 +43,11 @@ function Post ( props ) {
     }, [props.rerender ] );
 
     return (
-        <>
+        <div className="theCards">
             {post && post.map( ( post, idx ) => {
                 return (
-                  <div key={idx}>
-                  <Card style={{ width: '18rem' }}>
+                  <div key={idx} className='postCard'>
+                  <Card className="allCards" style={{ width: '50rem' }}>
                   <Card.Body>
                     <Card.Title>{post.title}</Card.Title>
                     <Card.Text>
@@ -54,21 +55,21 @@ function Post ( props ) {
                     </Card.Text>
                     
                      {post.comments &&
-                                <h3>Comments</h3>
+                                <h5>Comments</h5>
                             }
                             {post.comments && post.comments.map( ( comment, idx ) => {
                                 return (
-                                <Card.Text key={idx}>
+                                <Card className="commentCard" key={idx}>
                                     {comment.content}       
-                                </Card.Text>
+                                </Card>
                                    
                                 );
                             }
                             )}
                             
                             <AddComment postId={post.id} getData={getData} />
-                    <Button onClick={() => { handleDelete( post.id ); }} variant="primary">Delete Post</Button>
-                    <Button onClick={() => { handleEdit( post.id ); }} variant="primary">Edit Post</Button>
+                    <Button className="postButtons" onClick={() => { handleDelete( post.id ); }} variant="primary">Delete Post</Button>
+                    <Button className="postButtons" onClick={() => { handleEdit( post.id ); }} variant="primary">Edit Post</Button>
                   </Card.Body>
                 </Card>
                         </div>
@@ -76,7 +77,7 @@ function Post ( props ) {
                 );
             }
             )}
-        </>
+        </div>
     );
 }
 export default Post;
