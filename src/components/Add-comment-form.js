@@ -1,6 +1,8 @@
 import axios from "axios";
 import React from 'react';
-;
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function AddComment(props) {
 
@@ -8,9 +10,10 @@ function AddComment(props) {
         e.preventDefault();
         const comment = {
             'content': e.target.content.value,
+            'userId': props.postId
         };
         await axios.post(
-            `https://thawing-peak-42804.herokuapp.com/comment/${props.postId}`,
+            `http://localhost:3001/comment/${props.postId}`,
             comment
         ).then(() => {
             props.getData();
@@ -19,10 +22,12 @@ function AddComment(props) {
     return (
         <div>
             <h2>Add comment</h2>
-            <form onSubmit={handleSubmit}>
-                    <textarea type="text" placeholder="add comment" />
-                    <input type="submit" />
-            </form>
+            <Form onSubmit={handleSubmit}>
+                    <Form.Control id="content" type="text" placeholder="add comment" />
+                <Button type="submit">
+                    Comment
+                </Button>
+            </Form>
         </div>
     );
 }

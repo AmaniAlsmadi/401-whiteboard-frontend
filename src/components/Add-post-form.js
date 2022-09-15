@@ -1,6 +1,8 @@
 import axios from "axios";
 import React from "react";
-
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 function AddPost(props) {
@@ -12,7 +14,7 @@ function AddPost(props) {
 
         };
         await axios.post(
-            `https://thawing-peak-42804.herokuapp.com/post`,
+            `http://localhost:3001/post`,
             post
         ).then(() => {
             props.getData();
@@ -23,16 +25,19 @@ function AddPost(props) {
         <div className="whiteBoard">
             <h2>Add Post</h2>
 
-            <form onSubmit={handleSubmit}>
+            <Form onSubmit={handleSubmit}>
 
-                <label>Title</label>
-                <input type="title" placeholder="Enter title" name="title" />
+                <Form.Label>Title</Form.Label>
+                <Form.Control type="title" placeholder="Enter title" id="title" />
 
-                <label>Content</label>
-                <input type="text" placeholder="add post" name="content"/>
 
-                <input type="submit" />
-            </form>
+                <Form.Label>Content</Form.Label>
+                <Form.Control type="text" placeholder="add post" id="content" />
+
+                <Button variant="primary" type="submit">
+                    Post
+                </Button>
+            </Form>
         </div>
     );
 }
