@@ -22,7 +22,7 @@ function Post ( props ) {
 
     const handleDelete = async ( id ) => {
         try{
-        await axios.delete( `http://localhost:3001/post/${id}` );
+        await axios.delete( `https://thawing-peak-42804.herokuapp.com/post/${id}` );
         getData();
     } catch ( error ) {
         console.log( error );
@@ -31,7 +31,7 @@ function Post ( props ) {
 
     const handleEdit = async ( id ) => {
         try{
-      await axios.put( `http://localhost:3001/post/${id}` );
+      await axios.put( `https://thawing-peak-42804.herokuapp.com/post/${id}` );
       getData(); 
     } catch ( error ) {
         console.log( error );
