@@ -14,7 +14,7 @@ function AddPost(props) {
 
         };
         await axios.post(
-            `http://localhost:3001/post`,
+            `https://thawing-peak-42804.herokuapp.com/post`,
             post
         ).then(() => {
             props.getData();
