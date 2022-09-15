@@ -1,19 +1,16 @@
-
 import AddPost from "./components/Add-post-form";
 import Post from "./components/Post";
+import './App.css';
 import { useState } from "react";
 import React from 'react';
 
 function App() {
-
   const [rerender, setRerender] = useState(false);
-
   const handleRerender = () => {
     setRerender(!rerender);
   };
-  
   return (
-    <div>
+    <div className="App">
       <AddPost getData={handleRerender}/>
       <Post rerender={rerender}/>
     </div>

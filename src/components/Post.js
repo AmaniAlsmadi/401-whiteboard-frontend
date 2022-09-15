@@ -1,59 +1,78 @@
+
 import axios from "axios";
-import { useEffect } from "react";
-import { useState } from "react";
+import { useEffect , useState } from "react";
 import AddComment from "./Add-comment-form";
 import React from 'react';
-
+import Button from 'react-bootstrap/Button';
+import Card from 'react-bootstrap/Card';
 
 function Post ( props ) {
 
     const [ post, setPost ] = useState( [] );
 
     const getData = async () => {
-        const response = await axios.get( `https://thawing-peak-42804.herokuapp.com/post` );
-        setPost( response.data );
+        try{
+        const allData = await axios.get( `http://localhost:3001/post` );
+        setPost( allData.data.post );
+        console.log( allData.data.post );
+        } catch ( error ) {
+            console.log( error );
+        }
     };
 
     const handleDelete = async ( id ) => {
-        await axios.delete( `https://thawing-peak-42804.herokuapp.com/post/${id}` );
+        try{
+        await axios.delete( `http://localhost:3001/post/${id}` );
         getData();
+    } catch ( error ) {
+        console.log( error );
+    }
     };
 
+    const handleEdit = async ( id ) => {
+        try{
+      await axios.put( `http://localhost:3001/post/${id}` );
+      getData(); 
+    } catch ( error ) {
+        console.log( error );
+    }
+  };
     useEffect( () => {
         getData();
-    }, [ props.rerender ] );
+    }, [props.rerender ] );
 
     return (
         <>
             {post && post.map( ( post, idx ) => {
                 return (
-                    <div className="post-class" style={{ justifyContent: 'center', margin: '1rem' }} key={idx}>
-                        <div className="card-body">
-                            <h1 className="card-title">{post.title}</h1>
-                            <p className="card-text">{post.content}</p>
-                        </div>
-                        <div>
-                            <button onClick={() => {
-                                handleDelete( post.id );
-                            }}>delete post</button>
-                        </div>
-                        <div>
-                            {post.Comments &&
-                                <h2>Comments</h2>
+                  <div key={idx}>
+                  <Card style={{ width: '18rem' }}>
+                  <Card.Body>
+                    <Card.Title>{post.title}</Card.Title>
+                    <Card.Text>
+                    {post.content}
+                    </Card.Text>
+                    
+                     {post.comments &&
+                                <h3>Comments</h3>
                             }
-                            {post.Comments && post.Comments.map( ( comment, idx ) => {
+                            {post.comments && post.comments.map( ( comment, idx ) => {
                                 return (
-                                    <div className="card" style={{ justifyContent: 'center', margin: '1rem' }} key={idx}>
-                                        <div className="card-body">
-                                            <p className="card-text">{comment.content}</p>
-                                        </div>
-                                    </div>
+                                <Card.Text key={idx}>
+                                    {comment.content}       
+                                </Card.Text>
+                                   
                                 );
                             }
                             )}
+                            
                             <AddComment postId={post.id} getData={getData} />
+                    <Button onClick={() => { handleDelete( post.id ); }} variant="primary">Delete Post</Button>
+                    <Button onClick={() => { handleEdit( post.id ); }} variant="primary">Edit Post</Button>
+                  </Card.Body>
+                </Card>
                         </div>
-                    </div>
+                    
                 );
             }
             )}
