@@ -21,10 +21,9 @@ function AddComment(props) {
     };
     return (
         <div>
-            <h2>Add comment</h2>
-            <Form onSubmit={handleSubmit}>
-                    <Form.Control id="content" type="text" placeholder="add comment" />
-                <Button type="submit">
+            <Form className="commentForm" onSubmit={handleSubmit}>
+                    <Form.Control className="commentInput" id="content" type="text" placeholder="add comment" />
+                <Button className="commentB" type="submit">
                     Comment
                 </Button>
             </Form>
