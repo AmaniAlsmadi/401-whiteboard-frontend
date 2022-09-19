@@ -4,6 +4,7 @@ import Form from 'react-bootstrap/Form';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../App.css';
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 export default function signUp() {
 
@@ -14,7 +15,7 @@ export default function signUp() {
           email: e.target.email.value,
           password: e.target.password.value
         };
-    
+    if (data.password === e.target.confirmPassword.value) {
         await axios.post('https://thawing-peak-42804.herokuapp.com/signup', data)
         
         .then(res => {
@@ -23,7 +24,7 @@ export default function signUp() {
           window.location.href = '/post';
         })
         .catch(() => alert('Error try again'));
-    }
+    } else{alert('passwords do not match')};}
 
     return (
         
@@ -40,9 +41,13 @@ export default function signUp() {
         <Form.Label className="label">Password</Form.Label>
         <Form.Control className="input" type="password" id="password" placeholder="Password" />
 
-            <Button className="buttons" variant="primary" type="submit">
+        <Form.Label className="label">confirm password</Form.Label>
+                <Form.Control className="input" type="password" id="confirmPassword" placeholder="confirm password" />
+
+            <Button className="postButtons" variant="primary" type="submit">
                 Sign up
             </Button>
+            <Link to={`/`} ><Button  className="postButtons"  variant="primary" >Cancel</Button></Link>
         </Form>
     </div>
     )
