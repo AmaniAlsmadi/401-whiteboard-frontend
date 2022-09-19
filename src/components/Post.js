@@ -6,6 +6,8 @@ import React from 'react';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import '../App.css';
+import { Link } from "react-router-dom";
+
 
 function Post ( props ) {
 
@@ -30,14 +32,20 @@ function Post ( props ) {
     }
     };
 
-    const handleEdit = async ( id ) => {
-        try{
-      await axios.put( `https://thawing-peak-42804.herokuapp.com/post/${id}` );
-      getData(); 
+   
+
+  const deleteComment = async ( id ) => {
+    try{        
+    await axios.delete( `https://thawing-peak-42804.herokuapp.com/comment/${id}` );
+    getData();
     } catch ( error ) {
         console.log( error );
     }
-  };
+    };
+
+   
+
+
     useEffect( () => {
         getData();
     }, [props.rerender ] );
@@ -59,17 +67,23 @@ function Post ( props ) {
                             }
                             {post.comments && post.comments.map( ( comment, idx ) => {
                                 return (
-                                <Card className="commentCard" key={idx}>
-                                    {comment.content}       
+                                <Card className="cards" key={idx}>
+                                    <Card.Body className="commentCard">
+                                        <Card.Text className="text">
+                                    {comment.content}  
+                                    </Card.Text>
+                                    <input className="commentButtons" type="submit" value="Delete" onClick={() => deleteComment(comment.id)}/> 
+                                    <Link to={`/post`}><input className="commentButtons" type="submit" value="Edit" /></Link>
+                                    </Card.Body>
                                 </Card>
                                    
                                 );
-                            }
+                            }  
                             )}
                             
                             <AddComment postId={post.id} getData={getData} />
                     <Button className="postButtons" onClick={() => { handleDelete( post.id ); }} variant="primary">Delete Post</Button>
-                    <Button className="postButtons" onClick={() => { handleEdit( post.id ); }} variant="primary">Edit Post</Button>
+                    <Link to={`/post/${post.id}`} ><Button  className="postButtons"  variant="primary" >Edit Post</Button></Link>
                   </Card.Body>
                 </Card>
                         </div>
