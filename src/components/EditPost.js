@@ -24,7 +24,7 @@ export default function EditPost(props) {
     const handleEdit  = async(id) =>{
         
         try{
-            await axios.put(`https://thawing-peak-42804.herokuapp.com/comment/${id}`);
+            await axios.put(`https://thawing-peak-42804.herokuapp.com/post/${id}`);
             fetchData();
         } catch(error){
             console.log(error);

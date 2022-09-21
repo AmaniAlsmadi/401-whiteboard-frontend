@@ -6,7 +6,8 @@ import '../App.css';
 import axios from "axios";
 import { Link } from "react-router-dom";
 
-export default function signUp() {
+
+export default function signUp(props) {
 
     const handleSignup = async (e) => {
         e.preventDefault();
@@ -20,8 +21,8 @@ export default function signUp() {
         
         .then(res => {
           console.log(res.data)
-          alert(`welcome ${res.data.username}`)
-          window.location.href = '/post';
+          alert(`signup successfully , please login`)
+          window.location.href = '/';
         })
         .catch(() => alert('Error try again'));
     } else{alert('passwords do not match')};}
@@ -42,7 +43,7 @@ export default function signUp() {
         <Form.Control className="input" type="password" id="password" placeholder="Password" />
 
         <Form.Label className="label">confirm password</Form.Label>
-                <Form.Control className="input" type="password" id="confirmPassword" placeholder="confirm password" />
+                <Form.Control className="input" type="confirmPassword" id="confirmPassword" placeholder="confirm password" />
 
             <Button className="postButtons" variant="primary" type="submit">
                 Sign up
