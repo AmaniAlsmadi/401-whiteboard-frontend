@@ -6,11 +6,10 @@ import '../App.css';
 import { Link } from "react-router-dom";
 import axios from "axios";
 import base64 from 'base-64';
+import cookies from 'react-cookies';
 
-
-export default function signIn() {
-
-
+export default function signIn(props) {
+    
     const handleSignIn = (e) => {
     e.preventDefault();
     const data = {
@@ -27,8 +26,12 @@ export default function signIn() {
     })
       .then(res => {
         console.log(res.data)
-        alert(`welcome ${res.data.username}`)
-        window.location.href = '/post';
+        alert(`welcome ${res.data.username}`);
+        cookies.save('token', res.data.token);
+        cookies.save('userID', res.data.id); 
+        cookies.save('username', res.data.username);
+        props.setLoggedin(true);
+        //window.location.href = '/post';
       })
       .catch(() => alert('Invalid Login'));
   }
@@ -51,7 +54,7 @@ export default function signIn() {
                 <Button className="buttons" variant="primary" type="submit">
                     Sign in
                 </Button>
-                <Link to={`/signup`}><input className="logButtons" type="submit" value="If you don't have account sign up here" /> </Link>
+                <Link to={`/signup`} ><input className="logButtons" type="submit" value="If you don't have account sign up here" /> </Link>
            
            
             </Form>

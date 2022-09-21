@@ -4,7 +4,6 @@ import './index.css';
 import App from './App';
 import EditComment from './components/EditPost';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'; 
-import SignIn from './components/signIn';
 import SignUp from './components/signUp';
 
 
@@ -13,8 +12,8 @@ root.render(
   <React.StrictMode>
     <Router>
       <Routes>
-        <Route exact path="/" element={<SignIn />} />
-        <Route exact path="/post" element={<App />} />
+        
+        <Route exact path="/" element={<App />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/post/:id" element={<EditComment />} />
 
