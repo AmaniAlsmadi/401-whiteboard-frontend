@@ -3,6 +3,8 @@ import React from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import cookies from "react-cookies";
+
 
 function AddComment(props) {
 
@@ -10,7 +12,10 @@ function AddComment(props) {
         e.preventDefault();
         const comment = {
             'content': e.target.content.value,
-            'userId': props.postId
+            'userId': props.postId,
+            'ownername': cookies.load("username"),
+            'ownerId': cookies.load("userID"),
+            
         };
         await axios.post(
             `https://thawing-peak-42804.herokuapp.com/comment/${props.postId}`,

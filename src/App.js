@@ -12,10 +12,7 @@ function App() {
 
   const [loggedin, setLoggedin] = useState(false);
 
-  const [rerender, setRerender] = useState(false);
-  const handleRerender = () => {
-    setRerender(!rerender);
-  };
+
 
   useEffect(() => {
     const token = cookies.load('token');
@@ -26,16 +23,17 @@ function App() {
   }, []);
 
   const handleSignout = () => {
-    cookies.remove('token');
+     cookies.remove('token');
     cookies.remove('username');
     cookies.remove('userID');
+    cookies.remove('role');
     setLoggedin(false);
     };
 
   return (
     <div className="App">
       <When condition={loggedin}>
-      <Post rerender={rerender} getData={handleRerender} handleSignout={handleSignout}/>
+      <Post handleSignout={handleSignout}/>
      </When>
      <When condition={!loggedin}>
       

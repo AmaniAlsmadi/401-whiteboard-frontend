@@ -8,15 +8,15 @@ import Card from 'react-bootstrap/Card';
 import '../App.css';
 import { Link } from "react-router-dom";
 import AddPost from "./Add-post-form";
-//import cookies from 'react-cookies';
-//import Container from 'react-bootstrap/Container';
-//import Navbar from 'react-bootstrap/Navbar';
+import cookies from 'react-cookies';
 import NavBar from "./navbar";
+
 
 
 function Post(props) {
 
     const [post, setPost] = useState([]);
+    const [role, setRole] = useState('');
 
     const getData = async () => {
         try {
@@ -29,8 +29,13 @@ function Post(props) {
     };
 
     const handleDelete = async (id) => {
+        const token = cookies.load('token');
         try {
-            await axios.delete(`https://thawing-peak-42804.herokuapp.com/post/${id}`);
+            await axios.delete(`https://thawing-peak-42804.herokuapp.com/post/${id}`, {
+                headers: {
+                  Authorization: `Bearer ${token}`
+                }
+              })
             getData();
         } catch (error) {
             console.log(error);
@@ -51,8 +56,9 @@ function Post(props) {
 
 
     useEffect(() => {
+        setRole(cookies.load('role'));
         getData();
-    }, [props.rerender]);
+    }, []);
 
     return (
         <>
@@ -67,7 +73,8 @@ function Post(props) {
                         <div key={idx} className='postCard'>
                             <Card className="allCards" style={{ width: '50rem' }}>
                                 <Card.Body>
-                                    <Card.Title>{post.title}</Card.Title>
+                                <Card.Title>id : {post.ownerId} / {post.username} </Card.Title>
+                                <Card.Title>{post.title}</Card.Title>
                                     <Card.Text>
                                         {post.content}
                                     </Card.Text>
@@ -78,19 +85,28 @@ function Post(props) {
                                         return (
                                             <Card className="cards" key={idx}>
                                                 <Card.Body className="commentCard">
+                                                    <Card.Title>id : {comment.ownerId} / {comment.ownername} </Card.Title>
                                                     <Card.Text className="text">
                                                         {comment.content}
                                                     </Card.Text>
+                                                    {role === 'admin' &&
+                                                     <>
                                                     <input className="commentButtons" type="submit" value="Delete" onClick={() => deleteComment(comment.id)} />
                                                     <Link to={`/post`}><input className="commentButtons" type="submit" value="Edit" /></Link>
+                                                    </> 
+                                                    }
                                                 </Card.Body>
                                             </Card>
                                         );
                                     })}
                                     <AddComment postId={post.id} getData={getData} />
+                                    {role === 'admin' &&
+                                    <>
                                     <Button className="postButtons" onClick={() => { handleDelete(post.id); }} variant="primary">Delete Post</Button>
-                                    <Link to={`/post/${post.id}`} ><Button className="postButtons" variant="primary" >Edit Post</Button></Link>
-                                </Card.Body>
+                                    <Link to={`/post/${post.id}`} ><Button className="postButtons" variant="primary"  >Edit Post</Button></Link>
+                                     </> 
+                                     }
+                                    </Card.Body>
                             </Card>
                         </div>
                     );
