@@ -14,10 +14,11 @@ export default function signUp(props) {
         const data = {
           username: e.target.username.value,
           email: e.target.email.value,
-          password: e.target.password.value
+          password: e.target.password.value,
+          role: e.target.role.value,
         };
     if (data.password === e.target.confirmPassword.value) {
-        await axios.post('https://thawing-peak-42804.herokuapp.com/signup', data)
+        await axios.post(`http://localhost:3001/signup`, data)
         
         .then(res => {
           console.log(res.data)
@@ -33,17 +34,20 @@ export default function signUp(props) {
         <Form onSubmit={handleSignup}>
 
         <Form.Label className="label">User name</Form.Label>
-        <Form.Control className="input" type="text" id="username" placeholder="Enter your name" />
+        <Form.Control className="input" type="text" id="username"  />
 
         <Form.Label className="label">Email address</Form.Label>
-        <Form.Control className="input" type="email" id="email" placeholder="Enter email" />
+        <Form.Control className="input" type="email" id="email" />
        
 
         <Form.Label className="label">Password</Form.Label>
-        <Form.Control className="input" type="password" id="password" placeholder="Password" />
+        <Form.Control className="input" type="password" id="password"  />
 
         <Form.Label className="label">confirm password</Form.Label>
-                <Form.Control className="input" type="confirmPassword" id="confirmPassword" placeholder="confirm password" />
+                <Form.Control className="input" type="Password" id="confirmPassword"  />
+
+                <Form.Label className="label" htmlFor="disabledSelect">Roles</Form.Label>
+                <Form.Control className="input" type="text" id="role" placeholder="admin || user" />
 
             <Button className="postButtons" variant="primary" type="submit">
                 Sign up
@@ -53,3 +57,4 @@ export default function signUp(props) {
     </div>
     )
 }
+// <Form.Control className="input" type="text" id="role"  />

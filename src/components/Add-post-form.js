@@ -4,6 +4,7 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../App.css';
+import cookies from "react-cookies";
 
 function AddPost(props) {
     const handleSubmit = async (e) => {
@@ -11,12 +12,11 @@ function AddPost(props) {
         const post = {
             'title': e.target.title.value,
             'content': e.target.content.value,
-
+            'username': cookies.load("username"),
+            'ownerId': cookies.load("userID"),
         };
         await axios.post(
-            `https://thawing-peak-42804.herokuapp.com/post`,
-            post
-        ).then(() => {
+            `http://localhost:3001/post`, post ).then(() => {
             props.getData();
         });
     };

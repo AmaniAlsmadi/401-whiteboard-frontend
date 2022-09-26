@@ -19,7 +19,7 @@ export default function signIn(props) {
 
     const encodedCredintial = base64.encode(`${data.username}:${data.password}`);
     
-    axios.post('https://thawing-peak-42804.herokuapp.com/login', {}, {
+    axios.post(`http://localhost:3001/login`, {}, {
       headers: {
         Authorization: `Basic ${encodedCredintial}`
       }
@@ -30,6 +30,7 @@ export default function signIn(props) {
         cookies.save('token', res.data.token);
         cookies.save('userID', res.data.id); 
         cookies.save('username', res.data.username);
+        cookies.save('role', res.data.role);
         props.setLoggedin(true);
         //window.location.href = '/post';
       })
