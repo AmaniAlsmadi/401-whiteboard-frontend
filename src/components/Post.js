@@ -9,8 +9,6 @@ import '../App.css';
 import { Link } from "react-router-dom";
 import AddPost from "./Add-post-form";
 import cookies from 'react-cookies';
-//import Container from 'react-bootstrap/Container';
-//import Navbar from 'react-bootstrap/Navbar';
 import NavBar from "./navbar";
 
 
@@ -22,7 +20,7 @@ function Post(props) {
 
     const getData = async () => {
         try {
-            const allData = await axios.get(`http://localhost:3001/post`);
+            const allData = await axios.get(`https://thawing-peak-42804.herokuapp.com/post`);
             setPost(allData.data.post);
             console.log(allData.data.post);
         } catch (error) {
@@ -33,7 +31,7 @@ function Post(props) {
     const handleDelete = async (id) => {
         const token = cookies.load('token');
         try {
-            await axios.delete(`http://localhost:3001/post/${id}`, {
+            await axios.delete(`https://thawing-peak-42804.herokuapp.com/post/${id}`, {
                 headers: {
                   Authorization: `Bearer ${token}`
                 }
@@ -48,7 +46,7 @@ function Post(props) {
 
     const deleteComment = async (id) => {
         try {
-            await axios.delete(`http://localhost:3001/comment/${id}`);
+            await axios.delete(`https://thawing-peak-42804.herokuapp.com/comment/${id}`);
             getData();
         } catch (error) {
             console.log(error);

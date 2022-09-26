@@ -21,7 +21,7 @@ export default function EditPost() {
         };
         const token = cookies.load('token');
         try{
-            await axios.put(`http://localhost:3001/post/${id}`, {
+            await axios.put(`https://thawing-peak-42804.herokuapp.com/post/${id}`, {
                 headers: {
                   Authorization: `Bearer ${token}`
                 }

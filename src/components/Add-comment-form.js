@@ -18,7 +18,7 @@ function AddComment(props) {
             
         };
         await axios.post(
-            `http://localhost:3001/comment/${props.postId}`,
+            `https://thawing-peak-42804.herokuapp.com/comment/${props.postId}`,
             comment
         ).then(() => {
             props.getData();

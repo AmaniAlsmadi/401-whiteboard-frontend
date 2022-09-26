@@ -19,7 +19,7 @@ export default function signIn(props) {
 
     const encodedCredintial = base64.encode(`${data.username}:${data.password}`);
     
-    axios.post(`http://localhost:3001/login`, {}, {
+    axios.post(`https://thawing-peak-42804.herokuapp.com/login`, {}, {
       headers: {
         Authorization: `Basic ${encodedCredintial}`
       }

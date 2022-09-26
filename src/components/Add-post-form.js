@@ -16,7 +16,7 @@ function AddPost(props) {
             'ownerId': cookies.load("userID"),
         };
         await axios.post(
-            `http://localhost:3001/post`, post ).then(() => {
+            `https://thawing-peak-42804.herokuapp.com/post`, post ).then(() => {
             props.getData();
         });
     };

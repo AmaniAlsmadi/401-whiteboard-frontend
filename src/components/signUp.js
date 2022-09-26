@@ -18,7 +18,7 @@ export default function signUp(props) {
           role: e.target.role.value,
         };
     if (data.password === e.target.confirmPassword.value) {
-        await axios.post(`http://localhost:3001/signup`, data)
+        await axios.post(`https://thawing-peak-42804.herokuapp.com/signup`, data)
         
         .then(res => {
           console.log(res.data)
@@ -57,4 +57,3 @@ export default function signUp(props) {
     </div>
     )
 }
-// <Form.Control className="input" type="text" id="role"  />
