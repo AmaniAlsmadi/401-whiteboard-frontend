@@ -22,7 +22,7 @@ function NavBar(props) {
             Signed in as: <a href="#login">{cookies.load('username')}</a>
           </Navbar.Text>
         </Navbar.Collapse>
-        <Button onClick={props.setLoggedin} className="postButtons" variant="primary" type="submit">
+        <Button onClick={() => {props.setLoggedin()}} className="postButtons" variant="primary" type="submit">
                 log out
             </Button>
       </Container>
