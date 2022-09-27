@@ -12,6 +12,7 @@ export default function EditPost() {
   
   
     const handleEdit  = async(e) =>{
+        e.preventDefault();
         const post = {
             'title': e.target.newTitle.value,
             'content': e.target.newContent.value,
@@ -20,12 +21,16 @@ export default function EditPost() {
 
         };
         const token = cookies.load('token');
+        console.log(post);
+        console.log(id);
+
         try{
-            await axios.put(`https://thawing-peak-42804.herokuapp.com/post/${id}`, {
+            await axios.put(`https://thawing-peak-42804.herokuapp.com/post/${id}`, post, {
                 headers: {
                   Authorization: `Bearer ${token}`
                 }
-              },post);
+              }).then(() => {
+                window.location.href = `/`;})
             
         } catch(error){
             console.log(error);
@@ -37,7 +42,7 @@ export default function EditPost() {
     
         return (
             <div className="whiteBoard">
-            <Form onSubmit={()=>handleEdit(id)}>
+            <Form onSubmit={(e)=>handleEdit(e)}>
 
                 <Form.Label className="label">Edit Title</Form.Label>
                 <Form.Control id="newTitle" className="input" type="title"   />

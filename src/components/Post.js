@@ -62,7 +62,6 @@ function Post(props) {
 
     return (
         <>
-        {console.log(props)}
         <NavBar  setLoggedin={props.handleSignout}/>
 
       <AddPost getData={getData}/>
