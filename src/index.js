@@ -2,25 +2,37 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
-import EditComment from './components/EditPost';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'; 
 import SignUp from './components/signUp';
-
+import AuthContextProvider from "./Context/AuthContext";
+import EditPost from './components/EditPost';
+import EditComment from './components/EditComment';
+import PostContextProvider from "./Context/PostContext";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
+  
   <React.StrictMode>
+  <AuthContextProvider>
+  <PostContextProvider>
     <Router>
       <Routes>
         
         <Route exact path="/" element={<App />} />
+
         <Route path="/signup" element={<SignUp />} />
-        <Route path="/post/:id" element={<EditComment />} />
+        
+        <Route path="/post/:id" element={<EditPost />} />
+
+        <Route path="/comment/:id" element={<EditComment />} />
 
       </Routes>
       
     </Router>
+    </PostContextProvider>
+    </AuthContextProvider>
   </React.StrictMode>
+  
   
 );
 

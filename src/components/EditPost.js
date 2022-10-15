@@ -11,7 +11,7 @@ export default function EditPost() {
     const {id} = useParams();
   
   
-    const handleEdit  = async(e) =>{
+    const handleEditPost  = async(e) =>{
         e.preventDefault();
         const post = {
             'title': e.target.newTitle.value,
@@ -42,7 +42,7 @@ export default function EditPost() {
     
         return (
             <div className="whiteBoard">
-            <Form onSubmit={(e)=>handleEdit(e)}>
+            <Form onSubmit={(e)=>handleEditPost(e)}>
 
                 <Form.Label className="label">Edit Title</Form.Label>
                 <Form.Control id="newTitle" className="input" type="title"   />

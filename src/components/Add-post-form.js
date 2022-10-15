@@ -1,29 +1,20 @@
-import axios from "axios";
+
 import React from "react";
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../App.css';
-import cookies from "react-cookies";
 
-function AddPost(props) {
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        const post = {
-            'title': e.target.title.value,
-            'content': e.target.content.value,
-            'username': cookies.load("username"),
-            'ownerId': cookies.load("userID"),
-        };
-        await axios.post(
-            `https://thawing-peak-42804.herokuapp.com/post`, post ).then(() => {
-            props.getData();
-        });
-    };
+import { UsePostContext } from "../Context/PostContext";
+
+
+function AddPost() {
+    const { handleAddPost }= UsePostContext();
+
 
     return (
         <div className="whiteBoard">
-            <Form onSubmit={handleSubmit}>
+            <Form onSubmit={handleAddPost}>
 
                 <Form.Label className="label">Title</Form.Label>
                 <Form.Control className="input" type="title" placeholder="Enter title ..." id="title" />

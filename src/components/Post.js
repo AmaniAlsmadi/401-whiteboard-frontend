@@ -1,6 +1,5 @@
 
-import axios from "axios";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import AddComment from "./Add-comment-form";
 import React from 'react';
 import Button from 'react-bootstrap/Button';
@@ -8,63 +7,24 @@ import Card from 'react-bootstrap/Card';
 import '../App.css';
 import { Link } from "react-router-dom";
 import AddPost from "./Add-post-form";
-import cookies from 'react-cookies';
 import NavBar from "./navbar";
+import { UsePostContext } from "../Context/PostContext";
+import {UseAuthContext} from "../Context/AuthContext";
 
+function Post() {
 
-
-function Post(props) {
-
-    const [post, setPost] = useState([]);
-    const [role, setRole] = useState('');
-
-    const getData = async () => {
-        try {
-            const allData = await axios.get(`https://thawing-peak-42804.herokuapp.com/post`);
-            setPost(allData.data.post);
-            console.log(allData.data.post);
-        } catch (error) {
-            console.log(error);
-        }
-    };
-
-    const handleDelete = async (id) => {
-        const token = cookies.load('token');
-        try {
-            await axios.delete(`https://thawing-peak-42804.herokuapp.com/post/${id}`, {
-                headers: {
-                  Authorization: `Bearer ${token}`
-                }
-              })
-            getData();
-        } catch (error) {
-            console.log(error);
-        }
-    };
-
-
-
-    const deleteComment = async (id) => {
-        try {
-            await axios.delete(`https://thawing-peak-42804.herokuapp.com/comment/${id}`);
-            getData();
-        } catch (error) {
-            console.log(error);
-        }
-    };
-
-
+    const {role, post,handleDelete,deleteComment,checkRole }= UsePostContext();
+    const {canDo,userID}= UseAuthContext();
 
     useEffect(() => {
-        setRole(cookies.load('role'));
-        getData();
-    }, []);
+        checkRole();
+    },[]);
 
     return (
         <>
-        <NavBar  setLoggedin={props.handleSignout}/>
+        <NavBar />
 
-      <AddPost getData={getData}/>
+      <AddPost />
 
             <div className="theCards">
                 {post && post.map((post, idx) => {
@@ -72,7 +32,7 @@ function Post(props) {
                         <div key={idx} className='postCard'>
                             <Card className="allCards" style={{ width: '50rem' }}>
                                 <Card.Body>
-                                <Card.Title>id : {post.ownerId} / {post.username} </Card.Title>
+                                <Card.Title>{post.username} </Card.Title>
                                 <Card.Title>{post.title}</Card.Title>
                                     <Card.Text>
                                         {post.content}
@@ -84,22 +44,22 @@ function Post(props) {
                                         return (
                                             <Card className="cards" key={idx}>
                                                 <Card.Body className="commentCard">
-                                                    <Card.Title>id : {comment.ownerId} / {comment.ownername} </Card.Title>
+                                                    <Card.Title>{comment.ownername} </Card.Title>
                                                     <Card.Text className="text">
                                                         {comment.content}
                                                     </Card.Text>
-                                                    {role === 'admin' &&
+                                                    {canDo(comment.ownerId, userID) &&
                                                      <>
                                                     <input className="commentButtons" type="submit" value="Delete" onClick={() => deleteComment(comment.id)} />
-                                                    <Link to={`/post`}><input className="commentButtons" type="submit" value="Edit" /></Link>
+                                                    <Link to={`/comment/${comment.id}`}><input className="commentButtons" type="submit" value="Edit" id={comment.id} /></Link>
                                                     </> 
                                                     }
                                                 </Card.Body>
                                             </Card>
                                         );
                                     })}
-                                    <AddComment postId={post.id} getData={getData} />
-                                    {role === 'admin' &&
+                                    <AddComment postId={post.id} />
+                                    {canDo(post.ownerId, userID) &&
                                     <>
                                     <Button className="postButtons" onClick={() => { handleDelete(post.id); }} variant="primary">Delete Post</Button>
                                     <Link to={`/post/${post.id}`} ><Button className="postButtons" variant="primary"  >Edit Post</Button></Link>
