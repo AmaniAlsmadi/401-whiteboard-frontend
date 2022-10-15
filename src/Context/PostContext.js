@@ -67,8 +67,7 @@ const PostContextProvider = props => {
     const checkRole = () => {
         setRole(cookies.load('role'));
         getData();
-    }
-
+    };
     
   
     const value = {role, setRole , post, getData, handleDelete, deleteComment,checkRole,handleAddPost};

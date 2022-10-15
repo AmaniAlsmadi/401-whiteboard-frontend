@@ -13,17 +13,17 @@ import {UseAuthContext} from "../Context/AuthContext";
 
 function Post() {
 
-    const {role, post,handleDelete,deleteComment,checkRole }= UsePostContext();
+    const { post,handleDelete,deleteComment,checkRole }= UsePostContext();
     const {canDo,userID}= UseAuthContext();
 
     useEffect(() => {
         checkRole();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     },[]);
 
     return (
         <>
         <NavBar />
-
       <AddPost />
 
             <div className="theCards">
