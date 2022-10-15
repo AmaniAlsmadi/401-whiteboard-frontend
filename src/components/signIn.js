@@ -4,39 +4,11 @@ import Form from 'react-bootstrap/Form';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../App.css';
 import { Link } from "react-router-dom";
-import axios from "axios";
-import base64 from 'base-64';
-import cookies from 'react-cookies';
+import { UseAuthContext } from '../Context/AuthContext.js';
 
-export default function signIn(props) {
+export default function signIn() {
     
-    const handleSignIn = (e) => {
-    e.preventDefault();
-    const data = {
-      username: e.target.email.value,
-      password: e.target.password.value
-    };
-
-    const encodedCredintial = base64.encode(`${data.username}:${data.password}`);
-    
-    axios.post(`https://thawing-peak-42804.herokuapp.com/login`, {}, {
-      headers: {
-        Authorization: `Basic ${encodedCredintial}`
-      }
-    })
-      .then(res => {
-        console.log(res.data)
-        alert(`welcome ${res.data.username}`);
-        cookies.save('token', res.data.token);
-        cookies.save('userID', res.data.id); 
-        cookies.save('username', res.data.username);
-        cookies.save('role', res.data.role);
-        props.setLoggedin(true);
-        //window.location.href = '/post';
-      })
-      .catch(() => alert('Invalid Login'));
-  }
-
+const  { handleSignIn} = UseAuthContext();
 
     return (
         

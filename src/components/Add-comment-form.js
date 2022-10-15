@@ -4,11 +4,13 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import cookies from "react-cookies";
+import { UsePostContext } from "../Context/PostContext";
 
 
 function AddComment(props) {
+    const { getData }= UsePostContext();
 
-    const handleSubmit = async (e) => {
+    const handleAddComment = async (e) => {
         e.preventDefault();
         const comment = {
             'content': e.target.content.value,
@@ -21,12 +23,12 @@ function AddComment(props) {
             `https://thawing-peak-42804.herokuapp.com/comment/${props.postId}`,
             comment
         ).then(() => {
-            props.getData();
+            getData();
         });
     };
     return (
         <div>
-            <Form className="commentForm" onSubmit={handleSubmit}>
+            <Form className="commentForm" onSubmit={handleAddComment}>
                     <Form.Control className="commentInput" id="content" type="text" placeholder="add comment" />
                 <Button className="commentB" type="submit">
                     Comment
