@@ -24,7 +24,7 @@ export default function EditComment() {
         console.log(id);
 
         try{
-            await axios.put(`http://localhost:3001/comment/${id}`, comment, {
+            await axios.put(`https://thawing-peak-42804.herokuapp.com/comment/${id}`, comment, {
                 headers: {
                   Authorization: `Bearer ${token}`
                 }

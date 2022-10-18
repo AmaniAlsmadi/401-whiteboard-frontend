@@ -5,7 +5,7 @@ export const Login = (dispatch, payload) => {
     try{     
         dispatch({ type: actionType.REQUEST_LOGIN });   
         
-        axios.post(`http://localhost:3001/login`, {}, {
+        axios.post(`https://thawing-peak-42804.herokuapp.com/login`, {}, {
           headers: {
             Authorization: `Basic ${payload}`
           }
@@ -32,7 +32,7 @@ export const Login = (dispatch, payload) => {
     export const signup = async (dispatch, payload) => {
         try{
             dispatch({ type: actionType.REQUEST_SIGNUP });
-            await axios.post(`http://localhost:3001/signup`, payload)
+            await axios.post(`https://thawing-peak-42804.herokuapp.com/signup`, payload)
             .then(res => {
               console.log(res.data)
               alert(`signup successfully , please login`)
