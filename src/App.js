@@ -9,24 +9,22 @@ import { UseAuthContext } from './Context/AuthContext.js';
 
 function App() {
 
-  const {loggedin, setLoggedin,checkToken} = UseAuthContext();
+  const {user} = UseAuthContext();
 
 
 
   useEffect(() => {
-    checkToken();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
     
       <div className="App">
-      <When condition={loggedin}>
+      <When condition={user.loggedIn}>
       <Post />
      </When>
-     <When condition={!loggedin}>
+     <When condition={!user.loggedIn}>
       
-      <SignIn setLoggedin={setLoggedin}/>
+      <SignIn />
      </When>
      </div>
     
