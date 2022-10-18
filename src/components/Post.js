@@ -14,7 +14,7 @@ import {UseAuthContext} from "../Context/AuthContext";
 function Post() {
 
     const { post,handleDelete,deleteComment,checkRole }= UsePostContext();
-    const {canDo,userID}= UseAuthContext();
+    const {canDo}= UseAuthContext();
 
     useEffect(() => {
         checkRole();
@@ -48,7 +48,7 @@ function Post() {
                                                     <Card.Text className="text">
                                                         {comment.content}
                                                     </Card.Text>
-                                                    {canDo(comment.ownerId, userID) &&
+                                                    {canDo(comment.ownerId, localStorage.getItem('userID')) &&
                                                      <>
                                                     <input className="commentButtons" type="submit" value="Delete" onClick={() => deleteComment(comment.id)} />
                                                     <Link to={`/comment/${comment.id}`}><input className="commentButtons" type="submit" value="Edit" id={comment.id} /></Link>
@@ -59,9 +59,9 @@ function Post() {
                                         );
                                     })}
                                     <AddComment postId={post.id} />
-                                    {canDo(post.ownerId, userID) &&
+                                    {canDo(post.ownerId, localStorage.getItem('userID')) &&
                                     <>
-                                    <Button className="postButtons" onClick={() => { handleDelete(post.id); }} variant="primary">Delete Post</Button>
+                                    <Button className="postButtons" onClick={() => handleDelete(post.id)} variant="primary">Delete Post</Button>
                                     <Link to={`/post/${post.id}`} ><Button className="postButtons" variant="primary"  >Edit Post</Button></Link>
                                      </> 
                                      }

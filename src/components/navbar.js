@@ -3,7 +3,7 @@ import Navbar from 'react-bootstrap/Navbar';
 import Button from 'react-bootstrap/Button';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../App.css';
-import cookies from 'react-cookies';
+//import cookies from 'react-cookies';
 import { UseAuthContext } from '../Context/AuthContext.js';
 
 
@@ -20,7 +20,7 @@ function NavBar(props) {
         <Navbar.Toggle />
         <Navbar.Collapse className="justify-content-end">
           <Navbar.Text>
-            Signed in as: <a href="#login">{cookies.load('username')}</a>
+            Signed in as: <a href="#login">{localStorage.getItem('username')}</a>
           </Navbar.Text>
         </Navbar.Collapse>
         <Button onClick={handleSignout} className="postButtons" variant="primary" type="submit">

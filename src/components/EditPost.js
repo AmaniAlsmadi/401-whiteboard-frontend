@@ -2,7 +2,7 @@ import axios from 'axios';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { useParams } from "react-router-dom";
-import cookies from "react-cookies";
+//import cookies from "react-cookies";
 
 
 
@@ -16,16 +16,16 @@ export default function EditPost() {
         const post = {
             'title': e.target.newTitle.value,
             'content': e.target.newContent.value,
-            'username': cookies.load("username"),
-            'ownerId': cookies.load("userID"),
+            'username': localStorage.getItem("username"),
+            'ownerId': localStorage.getItem("userID"),
 
         };
-        const token = cookies.load('token');
+        const token = localStorage.getItem('token');
         console.log(post);
         console.log(id);
 
         try{
-            await axios.put(`https://thawing-peak-42804.herokuapp.com/post/${id}`, post, {
+            await axios.put(`http://localhost:3001/post/${id}`, post, {
                 headers: {
                   Authorization: `Bearer ${token}`
                 }
