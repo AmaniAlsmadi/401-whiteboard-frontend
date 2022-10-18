@@ -25,7 +25,7 @@ export default function EditPost() {
         console.log(id);
 
         try{
-            await axios.put(`http://localhost:3001/post/${id}`, post, {
+            await axios.put(`https://thawing-peak-42804.herokuapp.com/post/${id}`, post, {
                 headers: {
                   Authorization: `Bearer ${token}`
                 }

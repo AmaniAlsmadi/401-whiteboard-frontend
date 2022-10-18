@@ -44,7 +44,7 @@ const PostContextProvider = props => {
     const deleteComment = async (id) => {
         const token = localStorage.getItem('token');
         try {
-            await axios.delete(`http://localhost:3001/comment/${id}`, {
+            await axios.delete(`https://thawing-peak-42804.herokuapp.com/comment/${id}`, {
                 headers: {
                   Authorization: `Bearer ${token}`
                 }});
