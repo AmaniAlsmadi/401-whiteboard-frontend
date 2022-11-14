@@ -1,13 +1,12 @@
 import axios from "axios";
 import React from 'react';
-import Button from 'react-bootstrap/Button';
-import Form from 'react-bootstrap/Form';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import{ Button ,HStack, FormControl,Input} from '@chakra-ui/react';
 import { UsePostContext } from "../Context/PostContext";
 
 
 function AddComment(props) {
     const { getData }= UsePostContext();
+    //const {content, setContent} = React.useState('');
 
     const handleAddComment = async (e) => {
         e.preventDefault();
@@ -26,14 +25,18 @@ function AddComment(props) {
         });
     };
     return (
-        <div>
-            <Form className="commentForm" onSubmit={handleAddComment}>
-                    <Form.Control className="commentInput" id="content" type="text" placeholder="add comment" />
-                <Button className="commentB" type="submit">
+        
+            <form p='4' onSubmit={handleAddComment}>
+                <HStack>
+                    <FormControl>
+                 <Input className="commentInput" id='content' placeholder="add comment" />
+                 </FormControl>
+                <Button colorScheme='facebook' size='md' type="submit" >
                     Comment
-                </Button>
-            </Form>
-        </div>
+                </Button> 
+                </HStack>
+            </form>
+       
     );
 }
 

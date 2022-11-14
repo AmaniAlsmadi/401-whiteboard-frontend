@@ -1,17 +1,16 @@
 import axios from 'axios';
-import Button from 'react-bootstrap/Button';
-import Form from 'react-bootstrap/Form';
 import { useParams } from "react-router-dom";
 import cookies from "react-cookies";
+import { Container, Box, Button, HStack } from '@chakra-ui/react';
 
 
 
 export default function EditComment() {
-  
-    const {id} = useParams();
-  
-  
-    const handleEditComment  = async(e) =>{
+
+    const { id } = useParams();
+
+
+    const handleEditComment = async (e) => {
         e.preventDefault();
         const comment = {
             'content': e.target.newContent.value,
@@ -23,32 +22,37 @@ export default function EditComment() {
         console.log(comment);
         console.log(id);
 
-        try{
+        try {
             await axios.put(`https://thawing-peak-42804.herokuapp.com/comment/${id}`, comment, {
                 headers: {
-                  Authorization: `Bearer ${token}`
+                    Authorization: `Bearer ${token}`
                 }
-              }).then(() => {
-                window.location.href = `/`;})
-            
-        } catch(error){
+            }).then(() => {
+                window.location.href = `/`;
+            })
+
+        } catch (error) {
             console.log(error);
-        }}
-    
+        }
+    }
 
-   
 
-    
-        return (
-            <div>
-            <Form className="commentForm" onSubmit={handleEditComment}>
-                    <Form.Control className="commentInput" id="newContent" type="text" placeholder="Edit comment" />
-                <Button className="commentB" type="submit">
-                    Edit
-                </Button>
-            </Form>
-        </div>
-        )
-    
+
+
+
+    return (
+        <Container>
+            <Box border='1px' borderColor='gray.300' p='4' borderRadius='lg' margin='50px 0px 50px 0px' bgColor='rgb(240,242,245)'>
+                <form className="commentForm" onSubmit={handleEditComment}>
+                    <HStack>
+                        <input className="commentInput" id="newContent" type="text" placeholder="Edit comment" />
+                        <Button colorScheme='facebook' type="submit">
+                            Edit
+                        </Button></HStack>
+                </form>
+            </Box>
+        </Container>
+    )
+
 }
 

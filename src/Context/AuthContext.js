@@ -17,7 +17,7 @@ const AuthContextProvider = props => {
   const [user , dispatch ] = useReducer(AuthReducer, initialState)
 
   const canDo = (postOwnerId, loggedUserId) => {
-    console.log(postOwnerId, loggedUserId);
+    //console.log(postOwnerId, loggedUserId);
     if (postOwnerId ===  parseInt(loggedUserId) || localStorage.getItem('capabilities').includes("delete", "update")) {
       return true;
     }

@@ -1,36 +1,46 @@
 import React from "react";
-import Button from 'react-bootstrap/Button';
-import Form from 'react-bootstrap/Form';
-import 'bootstrap/dist/css/bootstrap.min.css';
 import '../App.css';
+import { Button, FormLabel, FormControl, Input, VStack, Container, Box } from '@chakra-ui/react'
 import { Link } from "react-router-dom";
 import { UseAuthContext } from '../Context/AuthContext.js';
 
-export default function signIn() {
-    
-const  { handleSignIn} = UseAuthContext();
+
+export default function SignIn(props) {
+
+    const { handleSignIn } = UseAuthContext();
+   
+
 
     return (
-        
-        <div className="whiteBoard">
-            <Form onSubmit={handleSignIn}>
 
-                <Form.Label className="label">Email address</Form.Label>
-                <Form.Control className="input" type="emai" id="email" placeholder="Enter email" />
-                <Form.Text className="text-muted">
-                    We'll never share your email with anyone else.
-                </Form.Text>
+        <Container>
+            <Box
+                border='1px'
+                borderColor='gray.300'
+                p='4'
+                borderRadius='lg'
+                margin='50px 0px 50px 0px'
+                bgColor={props.colorMode === 'light' ? 'gray.100' : 'rgb(26,32,44)'}
+            >
+                <form onSubmit={handleSignIn}>
+                    <VStack>
+                        <FormControl>
+                            <FormLabel >Email address</FormLabel>
+                            <Input className="input" type="emai" id="email" placeholder="Enter email" />
+                        </FormControl>
+                        <FormControl>
 
-                <Form.Label className="label">Password</Form.Label>
-                <Form.Control className="input" type="password" id="password" placeholder="Password" />
+                            <FormLabel >Password</FormLabel>
+                            <Input className="input" type="password" id="password" placeholder="Password" />
+                        </FormControl>
+                        <Button colorScheme='facebook' type="submit">
+                            Sign in
+                        </Button>
+                        <Link to={`/signup`} ><Input type="submit" value="If you don't have account sign up here" /> </Link>
 
-                <Button className="buttons" variant="primary" type="submit">
-                    Sign in
-                </Button>
-                <Link to={`/signup`} ><input className="logButtons" type="submit" value="If you don't have account sign up here" /> </Link>
-           
-           
-            </Form>
-        </div>
+                    </VStack>
+                </form>
+            </Box>
+        </Container>
     )
 }
