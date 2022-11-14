@@ -48,7 +48,7 @@ function Post(props) {
                                 <Box>
                                     <Box>
                                         <HStack>
-                                            <Circle size='40px' bgGradient='linear(to-r, blue.700, blue.500, blue.900)' color='white'>{post.username} </Circle>
+                                            <Circle size='50px' bgGradient='linear(to-r, blue.700, blue.500, blue.900)' fontSize='xs' color='white'>{post.username} </Circle>
                                             <Spacer />
                                             <Heading as='h4' size='md'>{post.title}</Heading>
                                             <Spacer />
@@ -75,7 +75,10 @@ function Post(props) {
                                                     <Box border='1px' borderColor='gray.300' p='2' borderRadius='lg' marginBottom='4' key={idx}>
                                                         <HStack className="commentCard">
                                                             <Box><HStack>
-                                                                <Circle size='40px' bgGradient='linear(to-r, blue.700, blue.500, blue.900)' color='white'>{comment.ownername} </Circle>
+                                                                <Circle size='50px'
+                                                                fontSize='xs'
+                                                                 bgGradient='linear(to-r, blue.700, blue.500, blue.900)'
+                                                                  color='white'>{comment.ownername} </Circle>
                                                                 <Text className="text">
                                                                     {comment.content}
                                                                 </Text>

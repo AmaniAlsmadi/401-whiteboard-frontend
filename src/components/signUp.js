@@ -4,7 +4,7 @@ import { Button, FormLabel, FormControl, Input, VStack, Container, Box, HStack }
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Link } from "react-router-dom";
 import { UseAuthContext } from '../Context/AuthContext.js';
-import colorMode from '../App.js';
+
 
 
 export default function signUp() {
@@ -19,7 +19,7 @@ export default function signUp() {
                 p='4'
                 borderRadius='lg'
                 margin='50px 0px 50px 0px'
-                bgColor={colorMode === 'light' ? 'gray.100' : 'rgb(26,32,44)'}
+                bgColor='rgb(54,86,148)'
             >
                 <form onSubmit={handleSignUp}>
                     <VStack>
@@ -44,10 +44,10 @@ export default function signUp() {
                             <Input type="text" id="role" placeholder="admin || user" />
                         </FormControl>
                         <HStack>
-                            <Button colorScheme='facebook' type="submit">
+                            <Button colorScheme='gray' type="submit">
                                 Sign up
                             </Button>
-                            <Link to={`/`} ><Button colorScheme='facebook'   >Cancel</Button></Link>
+                            <Link to={`/`} ><Button colorScheme='gray' >Cancel</Button></Link>
                         </HStack>
                     </VStack>
                 </form>

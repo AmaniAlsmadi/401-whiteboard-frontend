@@ -24,7 +24,7 @@ function NavBar(props) {
             
             <HStack>
               <Text>Signed in as:</Text>
-              <Circle size='40px' bgGradient='linear(to-r, blue.600, blue.500, blue.400)'> {localStorage.getItem('username')}</Circle>
+              <Circle size='50px' bgGradient='linear(to-r, blue.600, blue.500, blue.400)' fontSize='xs'> {localStorage.getItem('username')}</Circle>
           </HStack>
         </Navbar.Collapse>
         <Button onClick={handleSignout} className="postButtons"  type="submit">
