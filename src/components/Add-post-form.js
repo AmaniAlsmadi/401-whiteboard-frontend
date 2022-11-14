@@ -1,33 +1,40 @@
 
 import React from "react";
-import Button from 'react-bootstrap/Button';
-import Form from 'react-bootstrap/Form';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import '../App.css';
+import { Container, Button, FormLabel,FormControl, Box, Center,Input } from '@chakra-ui/react';
 
 import { UsePostContext } from "../Context/PostContext";
 
 
-function AddPost() {
-    const { handleAddPost }= UsePostContext();
+function AddPost(props) {
+    const { handleAddPost } = UsePostContext();
 
 
     return (
-        <div className="whiteBoard">
-            <Form onSubmit={handleAddPost}>
+        <Container>
+            <Box border='1px'
+             borderColor='gray.300' 
+             p='4' 
+             borderRadius='lg' 
+             margin='50px 0px 50px 0px' 
+            bgColor={ props.colorMode === 'light' ? 'gray.100' : 'rgb(26,32,44)' }
+            >
+                <form onSubmit={handleAddPost} >
+                    <FormControl>
+                    <FormLabel className="label">Title</FormLabel>
+                    <Input type="title" placeholder="Enter title ..." id="title" />
+                     </FormControl>
+                     <FormControl>
+                    <FormLabel className="label">Content</FormLabel>
+                    <Input as="textarea" rows={3}  placeholder="Enter post ..." id="content" />
+                    </FormControl>
+                    <Center>
+                        <Button colorScheme='facebook' type="submit" mt='4' >
+                            Post
+                        </Button></Center>
+                </form>
+            </Box>
+        </Container>
 
-                <Form.Label className="label">Title</Form.Label>
-                <Form.Control className="input" type="title" placeholder="Enter title ..." id="title" />
-
-
-                <Form.Label className="label">Content</Form.Label>
-                <Form.Control as="textarea" rows={3} className="input" type="text" placeholder="Enter post ..." id="content" />
-
-                <Button className="buttons" variant="primary" type="submit">
-                    Post
-                </Button>
-            </Form>
-        </div>
     );
 }
 

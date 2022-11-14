@@ -1,8 +1,7 @@
 import axios from 'axios';
-import Button from 'react-bootstrap/Button';
-import Form from 'react-bootstrap/Form';
 import { useParams } from "react-router-dom";
-//import cookies from "react-cookies";
+import { Container, Box ,Button, Center,FormLabel } from '@chakra-ui/react';
+import '../App.css';
 
 
 
@@ -41,19 +40,23 @@ export default function EditPost() {
 
     
         return (
-            <div className="whiteBoard">
-            <Form onSubmit={(e)=>handleEditPost(e)}>
+            <Container>
+            <Box border='1px' borderColor='gray.300' p='4' borderRadius='lg' margin='50px 0px 50px 0px' bgColor='rgb(240,242,245)'>
+            <form onSubmit={(e)=>handleEditPost(e)}>
 
-                <Form.Label className="label">Edit Title</Form.Label>
-                <Form.Control id="newTitle" className="input" type="title"   />
+                <FormLabel className="label">Edit Title</FormLabel>
+                <input id="newTitle" className="input" type="title"   />
 
 
-                <Form.Label className="label">Edit Content</Form.Label>
-                <Form.Control id="newContent" as="textarea" rows={3} className="input" type="text"  />
+                <FormLabel className="label">Edit Content</FormLabel>
+                <input id="newContent" as="textarea" rows={3} className="input" type="text"  />
                
-                <Button className="buttons" variant="primary" type="submit" > Save</Button>
-            </Form>
-        </div>
+                <Center>
+                <Button colorScheme='facebook' type="submit" > Save</Button>
+                </Center>
+            </form>
+           </Box>
+        </Container>
         )
     
 }

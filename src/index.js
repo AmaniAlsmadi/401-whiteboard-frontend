@@ -8,16 +8,24 @@ import AuthContextProvider from "./Context/AuthContext";
 import EditPost from './components/EditPost';
 import EditComment from './components/EditComment';
 import PostContextProvider from "./Context/PostContext";
+import { ChakraProvider, extendTheme, ColorModeScript  } from '@chakra-ui/react';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
+
+const theme = extendTheme({ 
+  initialColorMode: 'light',
+useSystemColorMode: false,})
+
 root.render(
   
   <React.StrictMode>
   <AuthContextProvider>
   <PostContextProvider>
+  <ChakraProvider>
+    <ColorModeScript  initialColorMode={theme.initialColorMode} />
     <Router>
       <Routes>
-        
+      
         <Route exact path="/" element={<App />} />
 
         <Route path="/signup" element={<SignUp />} />
@@ -29,11 +37,11 @@ root.render(
       </Routes>
       
     </Router>
+   </ChakraProvider>
     </PostContextProvider>
     </AuthContextProvider>
+    
   </React.StrictMode>
-  
-  
 );
 
 // If you want to start measuring performance in your app, pass a function
