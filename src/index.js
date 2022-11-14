@@ -8,13 +8,10 @@ import AuthContextProvider from "./Context/AuthContext";
 import EditPost from './components/EditPost';
 import EditComment from './components/EditComment';
 import PostContextProvider from "./Context/PostContext";
-import { ChakraProvider, extendTheme, ColorModeScript  } from '@chakra-ui/react';
+import { ChakraProvider } from '@chakra-ui/react';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
-const theme = extendTheme({ 
-  initialColorMode: 'light',
-useSystemColorMode: false,})
 
 root.render(
   
@@ -22,7 +19,6 @@ root.render(
   <AuthContextProvider>
   <PostContextProvider>
   <ChakraProvider>
-    <ColorModeScript  initialColorMode={theme.initialColorMode} />
     <Router>
       <Routes>
       
