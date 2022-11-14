@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { useParams } from "react-router-dom";
-import { Container, Box ,Button, Center,FormLabel } from '@chakra-ui/react';
+import { Container, Box ,Button, Center,FormLabel,Input,FormControl } from '@chakra-ui/react';
 import '../App.css';
 
 
@@ -41,16 +41,16 @@ export default function EditPost() {
     
         return (
             <Container>
-            <Box border='1px' borderColor='gray.300' p='4' borderRadius='lg' margin='50px 0px 50px 0px' bgColor='rgb(240,242,245)'>
+            <Box border='1px' borderColor='gray.300' p='4' borderRadius='lg' margin='50px 0px 50px 0px' bgColor='rgb(54,86,148)'>
             <form onSubmit={(e)=>handleEditPost(e)}>
-
+                <FormControl>
                 <FormLabel className="label">Edit Title</FormLabel>
-                <input id="newTitle" className="input" type="title"   />
-
-
+                <Input id="newTitle" className="input" type="title"   />
+                </FormControl>
+                <FormControl>
                 <FormLabel className="label">Edit Content</FormLabel>
-                <input id="newContent" as="textarea" rows={3} className="input" type="text"  />
-               
+                <Input id="newContent" as="textarea" rows={3} className="input" type="text"  />
+                </FormControl>
                 <Center>
                 <Button colorScheme='facebook' type="submit" > Save</Button>
                 </Center>

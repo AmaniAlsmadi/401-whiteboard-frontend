@@ -1,7 +1,8 @@
 import axios from 'axios';
 import { useParams } from "react-router-dom";
 import cookies from "react-cookies";
-import { Container, Box, Button, HStack } from '@chakra-ui/react';
+import { Container, Box, Button, HStack,FormControl,Input } from '@chakra-ui/react';
+
 
 
 
@@ -42,10 +43,12 @@ export default function EditComment() {
 
     return (
         <Container>
-            <Box border='1px' borderColor='gray.300' p='4' borderRadius='lg' margin='50px 0px 50px 0px' bgColor='rgb(240,242,245)'>
+            <Box border='1px' borderColor='gray.300' p='4' borderRadius='lg' margin='50px 0px 50px 0px' bgColor='rgb(54,86,148)'>
                 <form className="commentForm" onSubmit={handleEditComment}>
                     <HStack>
-                        <input className="commentInput" id="newContent" type="text" placeholder="Edit comment" />
+                        <FormControl>
+                        <Input className="commentInput" id="newContent" type="text" placeholder="Edit comment" />
+                       </FormControl>
                         <Button colorScheme='facebook' type="submit">
                             Edit
                         </Button></HStack>
