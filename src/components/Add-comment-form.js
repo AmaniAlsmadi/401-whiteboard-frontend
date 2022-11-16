@@ -31,7 +31,7 @@ function AddComment(props) {
                     <FormControl>
                  <Input className="commentInput" id='content' placeholder="add comment" />
                  </FormControl>
-                <Button colorScheme='facebook' size='md' type="submit" >
+                <Button bg='one' size='md' type="submit" >
                     Comment
                 </Button> 
                 </HStack>

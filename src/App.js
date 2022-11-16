@@ -9,6 +9,7 @@ import { UseAuthContext } from './Context/AuthContext.js';
 import { ChakraProvider  } from '@chakra-ui/react';
 import { extendTheme, ColorModeScript,useColorMode,IconButton  } from '@chakra-ui/react';
 import { FaSun, FaMoon } from 'react-icons/fa';
+import { myTheme } from "./style/theme";
 
 function App() {
   const {user} = UseAuthContext();
@@ -25,9 +26,9 @@ const { colorMode, toggleColorMode } = useColorMode('');
   }, []);
 
   return (
-     <ChakraProvider>
+     <ChakraProvider theme={myTheme}>
        
-      <ColorModeScript  initialColorMode={theme.initialColorMode} />
+      <ColorModeScript initialColorMode={theme.initialColorMode} />
       <div className="App"> 
       <When condition={user.loggedIn} >
       <Post colorMode={colorMode} toggleColorMode={toggleColorMode}/>
@@ -35,7 +36,7 @@ const { colorMode, toggleColorMode } = useColorMode('');
      <When condition={!user.loggedIn}>
       
            <IconButton
-        colorScheme='facebook'
+        bg='one'
         aria-label='Send email'
         icon={colorMode === 'light' ? <FaMoon /> : <FaSun /> }
         onClick={toggleColorMode}
