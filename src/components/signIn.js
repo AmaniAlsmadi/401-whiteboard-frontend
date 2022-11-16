@@ -16,11 +16,11 @@ export default function SignIn(props) {
         <Container>
             <Box
                 border='1px'
-                borderColor='gray.300'
+                borderColor='tertiary'
                 p='4'
                 borderRadius='lg'
-                margin='50px 0px 50px 0px'
-                bgColor={props.colorMode === 'light' ? 'gray.100' : 'rgb(26,32,44)'}
+                bgColor={props.colorMode === 'light' ? 'quaternary' : 'secondary' }
+                marginBlock='50px'
             >
                 <form onSubmit={handleSignIn}>
                     <VStack>
@@ -33,7 +33,7 @@ export default function SignIn(props) {
                             <FormLabel >Password</FormLabel>
                             <Input className="input" type="password" id="password" placeholder="Password" />
                         </FormControl>
-                        <Button colorScheme='facebook' type="submit">
+                        <Button bg='one' type="submit">
                             Sign in
                         </Button>
                         <Link to={`/signup`} ><Input type="submit" value="If you don't have account sign up here" /> </Link>

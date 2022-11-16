@@ -12,11 +12,11 @@ function AddPost(props) {
     return (
         <Container>
             <Box border='1px'
-             borderColor='gray.300' 
+             borderColor='tertiary' 
              p='4' 
              borderRadius='lg' 
              margin='50px 0px 50px 0px' 
-            bgColor={ props.colorMode === 'light' ? 'gray.100' : 'rgb(26,32,44)' }
+            bgColor={ props.colorMode === 'light' ? 'quaternary' : 'secondary'  }
             >
                 <form onSubmit={handleAddPost} >
                     <FormControl>
@@ -28,7 +28,7 @@ function AddPost(props) {
                     <Input as="textarea" rows={3}  placeholder="Enter post ..." id="content" />
                     </FormControl>
                     <Center>
-                        <Button colorScheme='facebook' type="submit" mt='4' >
+                        <Button bg='one' type="submit" mt='4' >
                             Post
                         </Button></Center>
                 </form>

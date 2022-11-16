@@ -40,15 +40,15 @@ function Post(props) {
 
                         <Container key={idx} >
                             <Box border='1px' 
-                            borderColor='gray.300' 
+                            borderColor='tertiary' 
                             p='4' 
                             borderRadius='lg'
-                            bgColor={ props.colorMode === 'light' ? 'gray.100' : 'rgb(26,32,44)' }
+                            bgColor={ props.colorMode === 'light' ? 'quaternary' : 'secondary'  }
                             >
                                 <Box>
                                     <Box>
                                         <HStack>
-                                            <Circle size='50px' bgGradient='linear(to-r, blue.700, blue.500, blue.900)' fontSize='xs' color='white'>{post.username} </Circle>
+                                            <Circle size='50px' bgGradient='linear(to-r, two, one , three)' fontSize='xs' color='white'>{post.username} </Circle>
                                             <Spacer />
                                             <Heading as='h4' size='md'>{post.title}</Heading>
                                             <Spacer />
@@ -72,12 +72,12 @@ function Post(props) {
                                         <AccordionPanel pb={4}>
                                             {post.comments && post.comments.map((comment, idx) => {
                                                 return (
-                                                    <Box border='1px' borderColor='gray.300' p='2' borderRadius='lg' marginBottom='4' key={idx}>
+                                                    <Box border='1px' borderColor='tertiary' p='2' borderRadius='lg' marginBottom='4' key={idx}>
                                                         <HStack className="commentCard">
                                                             <Box><HStack>
                                                                 <Circle size='50px'
                                                                 fontSize='xs'
-                                                                 bgGradient='linear(to-r, blue.700, blue.500, blue.900)'
+                                                                 bgGradient='linear(to-r, two, one , three)'
                                                                   color='white'>{comment.ownername} </Circle>
                                                                 <Text className="text">
                                                                     {comment.content}
@@ -98,20 +98,18 @@ function Post(props) {
                                                     </Box>
                                                 );
                                             })}
+                                            
                                             <AddComment postId={post.id} />
                                         </AccordionPanel>
                                     </AccordionItem>
                                 </Accordion>
 
-
-
-
                                 {canDo(post.ownerId, localStorage.getItem('userID')) &&
                                     <Box p='4'>
                                         <HStack>
                                             <Spacer />
-                                            <Button colorScheme='facebook' onClick={() => handleDelete(post.id)} >Delete Post</Button>
-                                            <Link to={`/post/${post.id}`} ><Button colorScheme='facebook' >Edit Post</Button></Link>
+                                            <Button bg='one' onClick={() => handleDelete(post.id)} >Delete Post</Button>
+                                            <Link to={`/post/${post.id}`} ><Button bg='one' >Edit Post</Button></Link>
                                             <Spacer />
                                         </HStack>
                                     </Box>

@@ -17,14 +17,14 @@ function NavBar(props) {
   return (
     <Navbar className='navbar'>
       <Container>
-        <Navbar.Brand>WHITEBOARD</Navbar.Brand>
+        <Navbar.Brand><Text bgGradient='linear(to-r, one, four , one)'>WHITEBOARD</Text></Navbar.Brand>
         <Navbar.Toggle />
         <Navbar.Collapse className="justify-content-end">
           
             
             <HStack>
               <Text>Signed in as:</Text>
-              <Circle size='50px' bgGradient='linear(to-r, blue.600, blue.500, blue.400)' fontSize='xs'> {localStorage.getItem('username')}</Circle>
+              <Circle size='50px' bgGradient='linear(to-r, one, three , one)' fontSize='xs'> {localStorage.getItem('username')}</Circle>
           </HStack>
         </Navbar.Collapse>
         <Button onClick={handleSignout} className="postButtons"  type="submit">
