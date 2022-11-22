@@ -1,15 +1,15 @@
-import { createContext, useContext,useReducer, useState} from "react";
+import { createContext, useContext, useState} from "react";
 import axios from "axios";
-//import cookies from 'react-cookies';
-import { PostReducer } from "../Reducer/PostReducer";
-import { postState } from "../config/initials";
+import {posts} from '../Redux/postSlice';
 import { getPost ,addPost,deletePost} from "../Actions/PostAction";
+import { useSelector, useDispatch } from "react-redux";
 
 const AuthContext = createContext();
 export const UsePostContext = () => useContext(AuthContext);
 const PostContextProvider = props => {
 
- const [post, dispatch] = useReducer(PostReducer, postState);
+ const post = useSelector(posts);
+ const dispatch = useDispatch();
 
     const [role, setRole] = useState('');
     

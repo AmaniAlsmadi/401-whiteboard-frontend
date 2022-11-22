@@ -1,10 +1,8 @@
-import { createContext, useContext,useReducer} from "react";
-//import cookies from "react-cookies";
-//import axios from "axios";
+import { createContext, useContext} from "react";
 import base64 from 'base-64';
 import { Login,signup,Logout } from "../Actions/AuthAction";
-import { AuthReducer } from "../Reducer/AuthReducer";
-import { initialState } from "../config/initials";
+import {users} from '../Redux/authSlice';
+import { useSelector,useDispatch } from "react-redux";
 
 
 const AuthContext = createContext();
@@ -14,7 +12,8 @@ export const UseAuthContext = () => useContext(AuthContext);
 
 const AuthContextProvider = props => {
 
-  const [user , dispatch ] = useReducer(AuthReducer, initialState)
+  const user  = useSelector(users);
+  const dispatch = useDispatch();
 
   const canDo = (postOwnerId, loggedUserId) => {
     //console.log(postOwnerId, loggedUserId);
