@@ -1,19 +1,19 @@
 import axios from "axios";
-import { actionType } from "../config/constant";
+import {  REQUEST_LOGIN, LOGIN, LOGIN_ERROR, LOGOUT, REQUEST_SIGNUP, SIGNUP_ERROR } from "../Redux/authSlice";
 
-export const Login = (dispatch, payload) => {
+export const Login = async(dispatch, payload) => {
     try{     
-        dispatch({ type: actionType.REQUEST_LOGIN });   
+        dispatch(REQUEST_LOGIN());   
         
-        axios.post(`https://thawing-peak-42804.herokuapp.com/login`, {}, {
+        await axios.post(`https://thawing-peak-42804.herokuapp.com/login`, {}, {
           headers: {
             Authorization: `Basic ${payload}`
           }
         })
           .then(res => {
             //console.log(res.data);
-            dispatch({ type: actionType.LOGIN, payload: res.data });
-            localStorage.setItem('currentUser', JSON.stringify(res.data));
+            dispatch( LOGIN(res.data));
+            localStorage.setItem('currentUser', res.data);
             localStorage.setItem('token', res.data.token);
             localStorage.setItem('username', res.data.username);
             localStorage.setItem('userID', res.data.id);
@@ -21,17 +21,17 @@ export const Login = (dispatch, payload) => {
             localStorage.setItem('capabilities', res.data.capabilities);
             
           })
-          .catch(err => dispatch({type: actionType.LOGIN_ERROR, payload: err}));
+          .catch(err => dispatch(LOGIN_ERROR()));
       
     } catch(e) {
-        dispatch({type: actionType.LOGIN_ERROR, payload: e}); 
+        dispatch(LOGIN_ERROR()); 
     }};
 
 
 
     export const signup = async (dispatch, payload) => {
         try{
-            dispatch({ type: actionType.REQUEST_SIGNUP });
+            dispatch(REQUEST_SIGNUP());
             await axios.post(`https://thawing-peak-42804.herokuapp.com/signup`, payload)
             .then(res => {
               console.log(res.data)
@@ -40,7 +40,7 @@ export const Login = (dispatch, payload) => {
             })
             .catch(() => alert('Error try again'));
         } catch(e) {
-            dispatch({type: actionType.SIGNUP_ERROR, payload: e});
+            dispatch(SIGNUP_ERROR());
         }
     };
 
@@ -52,5 +52,7 @@ export const Login = (dispatch, payload) => {
       localStorage.removeItem('userID');
       localStorage.removeItem('role');
       localStorage.removeItem('capabilities');
-      dispatch({ type: actionType.LOGOUT });
+      dispatch( LOGOUT());
     }
+
+    

@@ -9,6 +9,8 @@ import EditPost from './components/EditPost';
 import EditComment from './components/EditComment';
 import PostContextProvider from "./Context/PostContext";
 import { ChakraProvider } from '@chakra-ui/react';
+import { Provider } from 'react-redux';
+import Store from './Redux/store';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
@@ -16,6 +18,7 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   
   <React.StrictMode>
+    <Provider store={Store}>  
   <AuthContextProvider>
   <PostContextProvider>
   <ChakraProvider>
@@ -36,7 +39,7 @@ root.render(
    </ChakraProvider>
     </PostContextProvider>
     </AuthContextProvider>
-    
+    </Provider>
   </React.StrictMode>
 );
 
